@@ -3,25 +3,29 @@
   <head>
     <style>
        #map {
-        height: 400px;
+        height: 100vh;
         width: 100%;
+       }
+       body{
+         margin: 0;
+         padding: 0;
        }
     </style>
   </head>
   <body>
-    <h3>My Google Maps Demo</h3>
     <div id="map"></div>
     <script>
       function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
+        const centerPoint = {lat: 7.913671296845422, lng: 98.34687783610036}
+        const mapElement = document.getElementById('map')
+        const map = new google.maps.Map(mapElement, {
+          zoom: 11,
+          center: centerPoint
         });
-        var marker = new google.maps.Marker({
-          position: uluru,
+        const marker = new google.maps.Marker({
+          position: centerPoint,
           map: map
-        });
+        })
       }
     </script>
     <script async defer
