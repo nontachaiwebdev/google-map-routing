@@ -17,15 +17,46 @@
     <script>
       function initMap() {
         const centerPoint = {lat: 7.913671296845422, lng: 98.34687783610036}
+        const directionsService = new google.maps.DirectionsService()
+        const directionsDisplay = new google.maps.DirectionsRenderer()
+        const wayPointObject = [
+          {
+            location: {lat: 7.892068, lng: 98.298418},
+            stopover: true
+          },
+          {
+            location: {lat: 7.899017, lng: 98.351267},
+            stopover: true
+          },
+          {
+            location: {lat: 7.956885, lng: 98.283079},
+            stopover: true
+          }
+        ]
         const mapElement = document.getElementById('map')
         const map = new google.maps.Map(mapElement, {
           zoom: 11,
           center: centerPoint
-        });
+        })
+        directionsDisplay.setMap(map)
         const marker = new google.maps.Marker({
           position: centerPoint,
           map: map
         })
+        console.log(wayPointObject)
+        const request = {
+          origin: {lat: 7.888333, lng: 98.386972},
+          travelMode: 'DRIVING',
+          destination: {lat: 7.821181, lng: 98.322494},
+          waypoints: wayPointObject,
+          optimizeWaypoints: true,
+          provideRouteAlternatives: true
+        }
+        directionsService.route(request, function(result, status) {
+          if (status == 'OK') {
+            directionsDisplay.setDirections(result)
+          }
+        });
       }
     </script>
     <script async defer
